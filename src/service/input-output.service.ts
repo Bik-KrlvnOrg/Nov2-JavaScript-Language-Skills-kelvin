@@ -21,4 +21,8 @@ export class InputOutputService {
     outputMessage(message: string, data: any = "") {
         console.log(`${message} \n`, data)
     }
+
+    close() {
+        this.readline.close()
+    }
 }
