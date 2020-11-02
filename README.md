@@ -13,3 +13,13 @@ Persist state to anin-memory structure.
 1. Return options on fruits users can purchase. Users must be registered topurchase a fruit.
 Every fruit purchased must be recorded in account by the user. 
 1. Return user's purchase history.
+
+# Run application
+```bash
+usr@user:~$ yarn start
+```
+
+# Run test
+```bash
+usr@user:~$ yarn test
+```
