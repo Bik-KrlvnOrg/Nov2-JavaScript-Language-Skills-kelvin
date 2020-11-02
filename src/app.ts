@@ -10,6 +10,7 @@ export class Application {
     private selection = 0;
     private terminateProgram = 3;
     private sessionId: number | undefined;
+    private defaultId = 0
 
     constructor(
         private inputOutputService: InputOutputService,
@@ -66,7 +67,7 @@ export class Application {
         this.showStoreMenu()
         const data = await this.inputOutputService.requestInputAsync("select a fruit")
         const itemIndex = this.parseStoreInput(data)
-        const sessionId = this.sessionId || 0
+        const sessionId = this.sessionId || this.defaultId
         this.dbService.savePurchase({ itemIndex, sessionId })
         this.run()
     }
@@ -78,16 +79,22 @@ export class Application {
     }
 
     private showPurchaseHistory() {
-        const id = this.sessionId || 0
+        const id = this.sessionId || this.defaultId
         const history = this.dbService.getPurchases(id)
         this.inputOutputService.outputMessage("purchase history", history)
     }
 
     private parseStoreInput(selected: string) {
-        if (selected == "o") return 0;
-        if (selected == "p") return 1;
-        if (selected == "a") return 2;
-        return -1
+        const outOfIndex = -1;
+        const indexOfOrange = 0;
+        const indexOfPineapple = 1;
+        const indexOfApple = 2;
+
+        if (selected == "o") return indexOfOrange;
+        if (selected == "p") return indexOfPineapple;
+        if (selected == "a") return indexOfApple;
+        
+        return outOfIndex;
     }
 
     private isUserRegistered() {
