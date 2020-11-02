@@ -29,7 +29,8 @@ export class DatabaseService {
     }
 
     savePurchase(data: { itemIndex: number, sessionId: number }) {
-        if (data.itemIndex === -1) return
+        const outOfIndex = -1
+        if (data.itemIndex === outOfIndex) return
         const order = this.getStore()[data.itemIndex]
         this._dbPurchase.push({ sessionId: data.sessionId, order })
     }
